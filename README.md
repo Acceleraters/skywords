@@ -1,30 +1,19 @@
-# SkyWords V0.11
+# SkyWords V0.13.1
 
-可直接发布到 GitHub Pages 的背单词网页。词库、音标、图片与程序均包含在 index.html 中，发音数据的来源和许可证也内嵌于文件源码。
+新增 5/10/15/20/25/30 个词的快捷入口与 1–100 个词的自定义组数，记住上次选择；每日目标与每组数量分别设置。修正重复巩固导致的组进度膨胀；新增按日期的学习记录；统一“不清楚 / 有点印象 / 记得”三个评分选项。
 
-## 首次发布（无需命令行）
+本次检查修正了历史日期受时区变更影响、时间回调造成记录被过滤的问题，并统一日期输入框与日期按钮的行为。205 项逻辑与文件回归通过，实际浏览器点击和 iPhone 真机尚未验证。
 
-1. 登录 GitHub，新建名为 skywords 的 Public（公开）仓库。可以勾选添加 README，创建 main 分支。
-2. 在仓库中选择 Add file → Upload files，将此文件夹内的 index.html、.nojekyll、README.md 上传到仓库根目录，提交到 main。不要上传 ZIP，也不要再套一层文件夹。
-3. 打开仓库 Settings → Pages。
-4. Source 选择 Deploy from a branch，Branch 选择 main，目录选择 / (root)，点击 Save。
-5. 等待部署完成，使用 Pages 页面显示的 Visit site 链接。通常地址为 https://你的用户名.github.io/skywords/。
+词库、音标、图片、程序与数据许可证均嵌入 index.html。无需安装依赖或构建。
 
-首次发布还未完成时可能暂时出现 404。检查 Actions 中部署是否成功、main 根目录是否直接存在 index.html，以及 Pages 是否选择 main / (root)。
+## 更新已有网站
 
-## 使用与数据迁移
+解压部署包，使用 Add file → Upload files，将 index.html、README.md 上传到原 skywords 仓库的根目录并替换，提交到 main。不要上传 ZIP 或再套一层文件夹。保持 Settings → Pages 的 Deploy from a branch、main、/(root) 设置。等待部署完成后刷新网站。
 
-网页可通过电脑或 iPhone 浏览器访问。线上发布没有添加自动离线缓存，因此第一次访问需要联网，断网后可用性不保证；仍可下载 index.html 在支持 JavaScript 的本地 HTML 环境中运行。
+## 学习记录
 
-学习记录和个人单词仍保存在每个浏览器中，不会因为部署到 GitHub 就自动跨设备同步。先在原 V0.11 设置页导出完整备份，再在新网址的设置页恢复完整备份。个人备份文件保留在自己设备上，不需要上传仓库。
+首页“今天学过的词”，或词库“学习记录”，可查看日期并点击单词单独复习。当天评分后收录；重复词只列一条。自主复习保留原到期时间和正式计划。记录、个人词库、复习进度保存在当前浏览器，可通过设置导出/恢复完整备份；不会跨设备自动同步。旧版只能恢复每个词最近可确认的正式评分日期，无法补造完整历史。
 
-朗读使用设备英文语音，没有内置真人 MP3；可用性和音色取决于设备及浏览器。
+## 验证范围
 
-## 后续更新
-
-将新版部署文件覆盖到同一仓库的 main 分支，GitHub Pages 会重新发布。更新前建议导出完整备份，继续使用原网址。
-
-## 官方说明
-
-- [设置发布分支](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site)
-- [网页上传文件](https://docs.github.com/en/repositories/working-with-files/managing-files/adding-a-file-to-a-repository)
+参见完整离线包里的 V0.13.1_验证说明.txt。iPhone 真机 Safari 与系统语音仍需在实际设备确认。
