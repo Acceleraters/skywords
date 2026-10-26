@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="color-scheme" content="light dark">
-  <title>SkyWords V0.13.1 · 我的单词成长册</title>
+  <title>SkyWords V0.14.1 · 我的单词成长册</title>
   <style>:root{color-scheme:light;--bg:#f6f8fb;--surface:#fff;--soft:#edf3f9;--text:#202e43;--muted:#65748a;--line:#e0e7ef;--blue:#2765d5;--blue-soft:#e8f0ff;--green:#237758;--green-soft:#e8f4ee;--amber:#8d630e;--amber-soft:#fff4db;--red:#b74d56;--red-soft:#ffedef;--shadow:0 8px 32px #203c6010}
 html[data-theme=dark]{color-scheme:dark;--bg:#101a28;--surface:#182537;--soft:#213249;--text:#e9f0fa;--muted:#a4b4c9;--line:#2c3d54;--blue:#9bc0ff;--blue-soft:#263e60;--green:#8cd6b4;--green-soft:#1e4036;--amber:#eed089;--amber-soft:#423b29;--red:#f3a0a8;--red-soft:#452f3b;--shadow:0 8px 32px #0002}
 @media(prefers-color-scheme:dark){html:not([data-theme=light]){color-scheme:dark;--bg:#101a28;--surface:#182537;--soft:#213249;--text:#e9f0fa;--muted:#a4b4c9;--line:#2c3d54;--blue:#9bc0ff;--blue-soft:#263e60;--green:#8cd6b4;--green-soft:#1e4036;--amber:#eed089;--amber-soft:#423b29;--red:#f3a0a8;--red-soft:#452f3b;--shadow:0 8px 32px #0002}}
@@ -149,6 +149,10 @@ html[data-motion=reduce] .quick:hover .quick-arrow,html[data-motion=reduce] .lib
 /* V0.13 custom batch sizes */
 .custom-group{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-top:18px;padding:18px 22px;background:var(--surface);border:1px solid var(--line);border-radius:18px}.custom-group label{font-size:15px;font-weight:600}.custom-group>div{display:flex;align-items:center;gap:12px}.custom-group input,.group-size-input{width:88px;min-height:48px;border:1px solid var(--line);background:var(--soft);color:var(--text);border-radius:10px;font-size:16px;text-align:center;padding:8px}.custom-group>div>span{font-size:13px;color:var(--muted)}.group-size-input{flex-shrink:0}
 @media(max-width:760px){.custom-group{display:block;padding:16px}.custom-group label{display:block;margin-bottom:12px}.custom-group>div{gap:8px}.custom-group input{width:70px}.custom-group .primary{margin-left:auto;padding:12px 14px;gap:6px;font-size:13px}}
+
+/* V0.14: make goals and mixed-group counts explicit. */
+.group-composition{font-size:13px;color:var(--text);line-height:1.8;margin:10px 0 0;overflow-wrap:anywhere}#newRemaining{color:var(--text);font-size:12px;line-height:1.8}
+@media(max-width:760px){.group-composition{font-size:12px}}
 </style>
   
 
@@ -171,11 +175,11 @@ html[data-motion=reduce] .quick:hover .quick-arrow,html[data-motion=reduce] .lib
   <div class="page-heading"><div><p class="eyebrow" id="todayDate">TODAY / 今日学习</p><h1 id="homeTitle">今天，留住几个词<span class="blue-dot">。</span></h1></div><span class="quiet-label">一点点，也在向前</span></div>
   <div class="dashboard">
    <article class="journey-card">
-    <div class="journey-copy"><span class="tag">TODAY’S FOCUS / 今日学习</span><h2>一点回忆，<br>一点新发现。</h2><p id="resumeDescription">先复习，再学一点新词。</p><strong id="dueSummary" class="hero-due"></strong><button class="primary" data-action="resume" id="continueBtn">开始今日学习 <span aria-hidden="true">↗</span></button></div>
+    <div class="journey-copy"><span class="tag">TODAY’S FOCUS / 今日学习</span><h2>一点回忆，<br>一点新发现。</h2><p id="resumeDescription">新词与复习交替安排，按今天的计划学习。</p><strong id="dueSummary" class="hero-due"></strong><button class="primary" data-action="resume" id="continueBtn">开始今日学习 <span aria-hidden="true">↗</span></button></div>
     <div class="sky-art" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="sun"></div><div class="cloud cloud-one"></div><div class="cloud cloud-two"></div><div class="paper-plane">↗</div><span class="art-note">A LITTLE, EVERY DAY</span></div>
     <details class="home-plan"><summary>查看复习安排 <span aria-hidden="true">＋</span></summary><p id="nextReviewSummary"></p></details>
    </article>
-   <article class="daily-card card"><div class="section-heading"><h2>今日足迹</h2><button class="plain-link" data-page="settings">调整目标 ↗</button></div><div class="daily-numbers"><strong id="todayCount">0</strong><span>/ <b id="dailyGoal">50</b> 项计划</span></div><div class="track" role="progressbar" aria-label="今日练习进度" id="homeProgress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span></span></div><div class="daily-details"><div><span>初次学习</span><b id="newCount">0 / 30</b></div><div><span>到期复习</span><b id="reviewCount">0 / 20</b></div><div><span>计划用时</span><b id="minutesCount">20 分钟</b></div></div><p class="micro" id="attemptsSummary"></p></article>
+   <article class="daily-card card"><div class="section-heading"><h2>今日足迹</h2><button class="plain-link" data-page="settings">调整目标 ↗</button></div><div class="daily-numbers"><strong id="todayCount">0</strong><span>/ <b id="dailyGoal">50</b> 项计划</span></div><div class="track" role="progressbar" aria-label="今日练习进度" id="homeProgress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span></span></div><div class="daily-details"><div><span>新词 · 已学 / 目标</span><b id="newCount">0 / 30</b></div><div><span>到期复习</span><b id="reviewCount">0 / 20</b></div><div><span>计划用时</span><b id="minutesCount">20 分钟</b></div></div><p class="micro" id="newRemaining"></p><p class="micro" id="attemptsSummary"></p></article>
   </div>
   <button class="history-entry card" data-action="learning-records"><span><strong>今天学过的词</strong><small>按日期查看学习足迹，随时点开复习</small></span><span><b id="todayLearnedCount">0</b> 个词 ↗</span></button>
   <section class="home-section" aria-labelledby="quickTitle"><div class="section-heading"><div><p class="eyebrow">A SMALL STEP</p><h2 id="quickTitle">这次，想学多少个词？</h2></div><span class="muted desktop-only">选择本组词数</span></div><div class="quick-grid">
@@ -191,13 +195,13 @@ html[data-motion=reduce] .quick:hover .quick-arrow,html[data-motion=reduce] .lib
    <button class="library-card college" data-library="college"><span class="book-mark" aria-hidden="true">Ab</span><span class="library-text"><span class="book-tag">02 / NEXT LEVEL</span><strong>专升本词库</strong><span>资料词汇＋原有词条 · 共 1,212 项</span></span><span class="library-arrow" aria-hidden="true">↗</span></button>
    <button class="library-card mistakes" data-library="wrong"><span class="book-mark" aria-hidden="true">↺</span><span class="library-text"><span class="book-tag">03 / TRY AGAIN</span><strong>错词本 <em id="wrongBadge">0</em></strong><span>把还不熟悉的，再认识一次</span></span><span class="library-arrow" aria-hidden="true">↗</span></button>
   </div></section>
-  <div class="source-books" aria-label="按学习资料浏览"><button class="secondary" data-browse="highfreq">高频词 <b data-book-count="highfreq">497 项</b></button><button class="secondary" data-browse="synonyms">同义替换 <b data-book-count="synonyms">624 项</b></button><button class="secondary" data-browse="phrases">固定搭配 <b data-book-count="phrases">121 项</b></button></div><div class="personal-banner"><div><p class="eyebrow">WORDS FROM YOUR WORLD</p><h2>把今天遇见的词，带回来。</h2><p>书里、课堂上、路途中，都可以是词库的起点。</p></div><div><button class="primary" data-action="add-word">＋ 添加单词</button><button class="secondary" data-action="personal-library">个人词库 <span id="personalCount">0</span></button></div></div><footer class="home-footer"><span>SkyWords <b>V0.13.1</b></span><span>从学习资料出发，积累属于自己的词库。</span></footer>
+  <div class="source-books" aria-label="按学习资料浏览"><button class="secondary" data-browse="highfreq">高频词 <b data-book-count="highfreq">497 项</b></button><button class="secondary" data-browse="synonyms">同义替换 <b data-book-count="synonyms">624 项</b></button><button class="secondary" data-browse="phrases">固定搭配 <b data-book-count="phrases">121 项</b></button></div><div class="personal-banner"><div><p class="eyebrow">WORDS FROM YOUR WORLD</p><h2>把今天遇见的词，带回来。</h2><p>书里、课堂上、路途中，都可以是词库的起点。</p></div><div><button class="primary" data-action="add-word">＋ 添加单词</button><button class="secondary" data-action="personal-library">个人词库 <span id="personalCount">0</span></button></div></div><footer class="home-footer"><span>SkyWords <b>V0.14.1</b></span><span>从学习资料出发，积累属于自己的词库。</span></footer>
  </section>
 
  <section id="study" class="page" hidden aria-labelledby="studyHeading">
   <div class="study-wrap"><div class="study-head"><button class="icon-button" data-page="home" id="studyBack" aria-label="返回首页">←</button><div class="mode" role="group" aria-label="回忆方向"><button data-mode="en-zh" aria-pressed="true">英 → 中</button><button data-mode="zh-en" aria-pressed="false">中 → 英</button></div><button class="icon-button" data-action="study-settings" aria-label="学习设置">⚙</button></div>
    <div class="study-meta"><h1 id="studyHeading">自由学习</h1><span id="studyCounter">0 / 5 已完成</span></div><div class="track study-track" role="progressbar" id="studyProgress" aria-label="本组不同单词的完成进度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span></span></div>
-   <p id="groupStatus" class="group-status" role="status"></p><details class="reason-details" id="reasonDetails"><summary><span id="reasonTag" class="reason-tag">新词</span><span>为什么学这个词</span><span class="details-chevron" aria-hidden="true">⌄</span></summary><p id="repeatReason" class="repeat-reason"></p><p id="selectionNote" class="selection-note"></p></details>
+   <p id="groupComposition" class="group-composition"></p><p id="groupStatus" class="group-status" role="status"></p><details class="reason-details" id="reasonDetails"><summary><span id="reasonTag" class="reason-tag">新词</span><span>为什么学这个词</span><span class="details-chevron" aria-hidden="true">⌄</span></summary><p id="repeatReason" class="repeat-reason"></p><p id="selectionNote" class="selection-note"></p></details>
    <div class="study-card card" id="learningContent">
     <div id="wordPanel"><div class="word-content"><div class="word-main"><p class="eyebrow" id="recallPrompt">看英文，回忆中文</p><h2 class="word"><button id="wordTitle" class="word-pronounce" data-action="speak" aria-label="点击朗读当前英文单词"></button></h2><div class="pronunciation-block"><p id="phoneticLabel" class="phonetic-label"></p><button id="phonetic" class="phonetic-button" data-action="speak" aria-label="点击音标朗读"></button><div id="pronunciationTools" class="pronunciation-tools"><button id="speakerButton" class="sound-button" data-action="speak" aria-label="朗读当前单词">♪ <span>朗读</span></button><button id="slowButton" class="sound-button" data-action="speak-slow">慢读</button><label class="accent-label"><span class="sr-only">朗读口音</span><select id="studyAccent" aria-label="朗读口音"><option value="auto">本机优先</option><option value="us">美式</option><option value="uk">英式</option></select></label></div><details id="phoneticDetails" class="phonetic-details"><summary>读音说明</summary><p id="phoneticNote"></p></details><p id="speechStatus" class="sr-only" role="status" aria-live="polite"></p></div><button id="hintBtn" class="plain-link" data-action="hint">看联想提示</button></div><figure class="word-picture"><img id="wordImage" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MDAgNDIwIj4KPHJlY3Qgd2lkdGg9IjgwMCIgaGVpZ2h0PSI0MjAiIHJ4PSIzNiIgZmlsbD0iI0RERjJGRiIvPgo8cmVjdCB4PSIyNzAiIHk9IjgwIiB3aWR0aD0iMjIwIiBoZWlnaHQ9IjI3MCIgcng9IjE0IiBmaWxsPSIjOEJDOUY0Ii8+CjxyZWN0IHg9IjMwNSIgeT0iMTEwIiB3aWR0aD0iMTUwIiBoZWlnaHQ9IjI0MCIgcng9IjEwIiBmaWxsPSIjRkZGRkZGIi8+CjxjaXJjbGUgY3g9IjQyMCIgY3k9IjIzMCIgcj0iMTAiIGZpbGw9IiM0REE4RjUiLz4KPHBhdGggZD0iTTIyMCAyMTBoMTIwIiBzdHJva2U9IiMyNTg4REYiIHN0cm9rZS13aWR0aD0iMjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8cGF0aCBkPSJNMjYwIDE2NWwtNTUgNDUgNTUgNDUiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzI1ODhERiIgc3Ryb2tlLXdpZHRoPSIyNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+Cjwvc3ZnPg==" alt="单词情境联想图"><div id="imageFallback" hidden>✧<br><small>试着用例句建立联想</small></div><figcaption id="imageCaption">用画面，留下一点印象</figcaption></figure></div>
      <div id="answer" hidden><div class="answer-heading"><span class="eyebrow">THE MEANING</span><h3 id="meaning"></h3></div><div class="phrases" id="phrases"></div><details id="relatedDetails" class="related-details" hidden><summary>近义与相关表达</summary><p class="micro">来自同义替换资料；同组表达不一定能直接互换，请结合词义、句型与语境。sb 表示某人，sth 表示某事物。</p><div id="relatedWords"></div></details><p id="wordNotes" class="micro" hidden></p><p id="sourceNote" class="micro" hidden></p><div class="example"><span class="eyebrow">放进句子里记</span><button id="exampleEnglish" class="example-speak" data-action="speak-example" title="点击朗读例句"></button><p id="exampleChinese"></p></div></div>
@@ -1035,13 +1039,32 @@ function gradeMemory(previous,level,now,seq,date){
  return next;
 }
 function shuffleWords(ids,random=Math.random){const a=[...ids];for(let i=a.length-1;i>0;i--){const j=Math.min(i,Math.floor(Math.max(0,random())*(i+1)));[a[i],a[j]]=[a[j],a[i]];}return a;}
+// Allocate distinct words first; same-word repeats remain the session engine's separate work.
 function plannedTasks(ids,memory,now,seq,newBudget,reviewBudget,limit,random=Math.random){
+ const amount=x=>Number.isFinite(Number(x))?Math.max(0,Math.floor(Number(x))):0;
+ const size=amount(limit),freshBudget=amount(newBudget),dueBudget=amount(reviewBudget);if(!size)return [];
  const unique=[...new Set(ids)],ready=unique.filter(id=>memoryReady(memory[id],now,seq));
- // Shuffle tied due times; otherwise earliest due first. No future card is pulled forward.
  const short=shuffleWords(ready.filter(id=>memory[id].stage==='relearn'),random).sort((a,b)=>memory[a].due-memory[b].due);
- const due=shuffleWords(ready.filter(id=>memory[id].stage==='review'),random).sort((a,b)=>memory[a].due-memory[b].due).slice(0,Math.max(0,reviewBudget));
- const fresh=shuffleWords(unique.filter(id=>!cleanMemory(memory[id])),random).slice(0,Math.max(0,newBudget));
- return [...short.map(word=>({word,kind:'relearn'})),...due.map(word=>({word,kind:'review'})),...fresh.map(word=>({word,kind:'new'}))].slice(0,limit);
+ const due=shuffleWords(ready.filter(id=>memory[id].stage==='review'),random).sort((a,b)=>memory[a].due-memory[b].due).slice(0,dueBudget);
+ const fresh=shuffleWords(unique.filter(id=>!cleanMemory(memory[id])),random).slice(0,freshBudget);
+ if(size===1){
+  const older=short.length&&due.length?(memory[short[0]].due<=memory[due[0]].due?{word:short[0],kind:'relearn'}:{word:due[0],kind:'review'}):short.length?{word:short[0],kind:'relearn'}:due.length?{word:due[0],kind:'review'}:null;
+  return fresh.length&&(!older||seq%2===0)?[{word:fresh[0],kind:'new'}]:older?[older]:[];
+ }
+ // Keep space for new words and scheduled review; consolidations cannot fill a mixed group.
+ const reserve=(fresh.length?1:0)+(due.length?1:0);
+ let shortCount=reserve?Math.min(short.length,Math.max(0,size-reserve),Math.max(1,Math.min(2,Math.floor(size/5)))):Math.min(size,short.length);
+ const slots=size-shortCount;
+ let wantedNew=fresh.length?(due.length?Math.max(1,Math.min(slots-1,Math.ceil(slots*freshBudget/(freshBudget+dueBudget)))):slots):0;
+ let newCount=Math.min(fresh.length,wantedNew),dueCount=Math.min(due.length,slots-newCount);
+ // Use available, eligible words if one category has fewer tasks than its share.
+ let left=slots-newCount-dueCount;
+ if(left){const add=Math.min(left,fresh.length-newCount);newCount+=add;left-=add;}
+ if(left){const add=Math.min(left,due.length-dueCount);dueCount+=add;left-=add;}
+ shortCount+=Math.min(left,short.length-shortCount);
+ const queues=[fresh.slice(0,newCount).map(word=>({word,kind:'new'})),due.slice(0,dueCount).map(word=>({word,kind:'review'})),short.slice(0,shortCount).map(word=>({word,kind:'relearn'}))],out=[];
+ for(let i=0;out.length<size&&queues.some(q=>i<q.length);i++)for(const q of queues)if(i<q.length&&out.length<size)out.push(q[i]);
+ return out;
 }
 
 
@@ -1084,10 +1107,25 @@ words.splice(0,words.length,...combinedWords(restoredEntries));words.forEach(w=>
 let recordDate=localDate();
 
 // Count distinct rated words, independently of the mutable consolidation queue.
+// Capture original membership and category; memory stages and inserted tasks never redefine it.
+function makeSessionPlan(tasks,baseIds){
+ const allowed=Array.isArray(baseIds)&&baseIds.length?new Set(baseIds):null,seen=new Set(),plan=[];
+ for(const t of tasks||[]){if(!t||seen.has(t.word)||(allowed&&!allowed.has(t.word)))continue;seen.add(t.word);plan.push(Object.freeze({word:t.word,kind:t.kind}));}
+ return Object.freeze(plan);
+}
+function validSessionPlan(plan,tasks,baseIds,known=validNames){
+ if(!Array.isArray(plan)||plan.length>MAX_GROUP_SIZE||new Set(plan.map(t=>t?.word)).size!==plan.length||plan.some(t=>!known.has(t?.word)||!['new','review','relearn','practice'].includes(t.kind)))return false;
+ const expected=new Set(makeSessionPlan(tasks,baseIds).map(t=>t.word));return plan.length===expected.size&&plan.every(t=>expected.has(t.word));
+}
+function sessionPlan(s){if(!Array.isArray(s.plan))s.plan=makeSessionPlan(s.tasks,s.baseIds);return s.plan;}
 function groupProgress(s){
- const ids=[...new Set((s.baseIds?.length?s.baseIds:s.tasks.map(t=>t.word)))];
- const done=new Set(s.tasks.slice(0,s.index).map(t=>t.word));
- return {total:ids.length,done:ids.filter(id=>done.has(id)).length,extra:s.index-new Set(s.tasks.slice(0,s.index).map(t=>t.word)).size,repeated:s.index<s.tasks.length&&done.has(s.tasks[s.index].word)};
+ const plan=sessionPlan(s),doneWords=new Set(s.tasks.slice(0,s.index).map(t=>t.word)),done=plan.filter(t=>doneWords.has(t.word)).length;
+ return {total:plan.length,done,extra:s.index-done,repeated:s.index<s.tasks.length&&doneWords.has(s.tasks[s.index].word)};
+}
+function groupTaskCounts(s){
+ const done=new Set(s.tasks.slice(0,s.index).map(t=>t.word)),counts={newTotal:0,newDone:0,reviewTotal:0,reviewDone:0,practiceTotal:0,practiceDone:0};
+ for(const t of sessionPlan(s)){const key=t.kind==='new'?'new':t.kind==='practice'?'practice':'review';counts[key+'Total']++;if(done.has(t.word))counts[key+'Done']++;}
+ return counts;
 }
 function validRecordDate(key){
  if(typeof key!=='string'||!/^\d{4}-\d{1,2}-\d{1,2}$/.test(key))return false;
@@ -1152,6 +1190,8 @@ if(saved.session?.engine===6){
  const old=saved.session,remaining=cleanList(old.ids.slice(clamp(old.index??0,0,old.ids.length,0)));
  if(remaining.length&&Object.hasOwn(names,old.source)){const tasks=remaining.map(word=>({word,kind:state.memory[word]?'review':'new'}));state.session={engine:6,tasks,ids:remaining,source:old.source,limit:groupLimit(old.limit),index:0,revealed:false,hintUsed:false,history:[],practice:false,shortUsed:0,baseIds:remaining,explicit:true};}
 }
+// Migration: original task kinds are retained by older versions, so capture once on load.
+if(state.session)state.session.plan=makeSessionPlan(validSessionPlan(saved.session?.plan,state.session.tasks,state.session.baseIds)?saved.session.plan:state.session.tasks,state.session.baseIds);
 function persist(){try{localStorage.setItem(KEY,JSON.stringify(state));storageOK=true;}catch{if(storageOK)toast('浏览器暂不能保存记录；本次仍可正常学习。');storageOK=false;} $('sessionNote').textContent=storageOK?'进度自动保存在此浏览器':'本次可学习，关闭后进度可能丢失';}
 function ensureDay(){if(state.day.date!==localDate())state.day={date:localDate(),newCount:0,reviewCount:0,dueCount:0,practiceCount:0};}
 function toast(message){if($('wordDialog')?.open){lookupStatus(message);return;}clearTimeout(toastTimer);$('toast').textContent=message;$('toast').classList.add('show');toastTimer=setTimeout(()=>$('toast').classList.remove('show'),3200);}
@@ -1160,7 +1200,7 @@ function pool(source){return words.filter(w=>['school','college','highfreq','syn
 function currentWord(){const s=state.session;return s?words.find(w=>w.word===s.ids[s.index]):null;}
 function activeSession(){return !!state.session && state.session.index<state.session.ids.length;}
 function progress(id,value){const bar=$(id).querySelector('span');bar.style.width='100%';bar.style.transform=`scaleX(${value/100})`;$(id).setAttribute('aria-valuenow',Math.round(value));}
-function updateHome(){ensureDay();$('todayLearnedCount').textContent=Object.keys(state.learningLog[localDate()]||{}).length;updateReviewSummary();const s=state.settings,total=state.day.newCount+state.day.dueCount,target=s.newGoal+s.reviewGoal;$('todayCount').textContent=total;$('dailyGoal').textContent=target;$('newCount').textContent=`${state.day.newCount} / ${s.newGoal}`;$('reviewCount').textContent=`${state.day.dueCount||0} / ${s.reviewGoal}`;$('minutesCount').textContent=`${s.studyMinutes} 分钟`;progress('homeProgress',target?Math.min(total/target*100,100):0);$('wrongBadge').textContent=state.wrong.length;$('personalCount').textContent=state.personal.length;$('wordCountNote').textContent=`当前词库共 ${words.length} 个不重复的单词和短语；同一个词跨词库共用复习进度。`; $('todayDate').textContent=new Intl.DateTimeFormat('zh-CN',{month:'long',day:'numeric',weekday:'long'}).format(new Date())+' / TODAY';$('continueBtn').textContent=activeSession()?'继续上次学习 ↗':'开始今日学习 ↗';$('resumeDescription').textContent=activeSession()?`${names[state.session.source]} · ${groupProgress(state.session).done} / ${groupProgress(state.session).total} 个词已完成`:'先复习，再学一点新词。';if(!activeSession()&&!availableTasks('all',1).length){$('continueBtn').textContent='查看学习安排 →';$('resumeDescription').textContent='现在没有可安排的任务，可以先休息一下。';}}
+function updateHome(){ensureDay();$('todayLearnedCount').textContent=Object.keys(state.learningLog[localDate()]||{}).length;$('newRemaining').textContent='今日新词还可学 '+Math.max(0,state.settings.newGoal-state.day.newCount)+' 个；每日目标 '+state.settings.newGoal+' 个。';updateReviewSummary();const s=state.settings,total=state.day.newCount+state.day.dueCount,target=s.newGoal+s.reviewGoal;$('todayCount').textContent=total;$('dailyGoal').textContent=target;$('newCount').textContent=`${state.day.newCount} / ${s.newGoal}`;$('reviewCount').textContent=`${state.day.dueCount||0} / ${s.reviewGoal}`;$('minutesCount').textContent=`${s.studyMinutes} 分钟`;progress('homeProgress',target?Math.min(total/target*100,100):0);$('wrongBadge').textContent=state.wrong.length;$('personalCount').textContent=state.personal.length;$('wordCountNote').textContent=`当前词库共 ${words.length} 个不重复的单词和短语；同一个词跨词库共用复习进度。`; $('todayDate').textContent=new Intl.DateTimeFormat('zh-CN',{month:'long',day:'numeric',weekday:'long'}).format(new Date())+' / TODAY';$('continueBtn').textContent=activeSession()?'继续上次学习 ↗':'开始今日学习 ↗';$('resumeDescription').textContent=activeSession()?`${names[state.session.source]} · ${groupProgress(state.session).done} / ${groupProgress(state.session).total} 个词已完成`:'新词与复习交替安排，按今天的计划学习。';if(!activeSession()&&!availableTasks('all',1).length){$('continueBtn').textContent='查看学习安排 →';$('resumeDescription').textContent='现在没有可安排的任务，可以先休息一下。';}}
 function stopSpeech(){if($('speechStatus'))$('speechStatus').textContent='';speechToken++;clearTimeout(speechTimer);if('speechSynthesis'in window){const synth=window.speechSynthesis;if(activeUtterance||synth.speaking||synth.pending||synth.paused)synth.cancel();}activeUtterance=null;$('speakerButton').setAttribute('aria-busy','false');document.querySelectorAll('.speaking').forEach(b=>{b.classList.remove('speaking');b.setAttribute('aria-busy','false');});}
 function showPage(id,{focus=true}={}){
  if(!['home','study','library','settings'].includes(id))return;const priorPage=currentPage;if(priorPage!==id)cancelMotion();
@@ -1179,7 +1219,7 @@ function createSession(limit,source,firstWord,practice=false,scopeIds=null){
  ensureDay();const ids=pool(source).map(w=>w.word).filter(id=>!Array.isArray(scopeIds)||scopeIds.includes(id)),now=Date.now();
  let tasks=practice?shuffleWords(ids).slice(0,Math.min(limit,ids.length)).map(word=>({word,kind:'practice'})):plannedTasks(ids,state.memory,now,state.seq,Math.max(0,state.settings.newGoal-state.day.newCount),Math.max(0,state.settings.reviewGoal-(state.day.dueCount||0)),limit);
  if(firstWord&&ids.includes(firstWord)){tasks=tasks.filter(t=>t.word!==firstWord);tasks.unshift({word:firstWord,kind:practice?'practice':!state.memory[firstWord]?'new':state.memory[firstWord].stage==='relearn'?'relearn':'review'});tasks=tasks.slice(0,limit);}
- state.session={engine:6,tasks,ids:tasks.map(t=>t.word),source,limit,index:0,revealed:false,hintUsed:false,history:[],practice,shortUsed:0,baseIds:tasks.map(t=>t.word),explicit:!!firstWord,scopeIds:Array.isArray(scopeIds)?cleanList(scopeIds):null};persist();
+ state.session={engine:6,tasks,ids:tasks.map(t=>t.word),source,limit,index:0,revealed:false,hintUsed:false,history:[],practice,shortUsed:0,baseIds:tasks.map(t=>t.word),explicit:!!firstWord,scopeIds:Array.isArray(scopeIds)?cleanList(scopeIds):null};state.session.plan=makeSessionPlan(tasks,state.session.baseIds);persist();
 }
 function startSession(limit,source='all',firstWord,practice=false,scopeIds=null){stopSpeech();createSession(limit,source,firstWord,practice,scopeIds);showPage('study');}
 function startChosenGroup(count){
@@ -1196,10 +1236,11 @@ function renderWordView(){
  $('studyActions').hidden=empty||complete;$('studyDock').classList.toggle('is-active',!empty&&!complete);$('reasonDetails').hidden=empty||complete;document.body.dataset.studying=String(!empty&&!complete);$('wordPanel').hidden=empty||complete;$('completePanel').hidden=!complete;$('emptyPanel').hidden=!empty;
  const gp=groupProgress(s);$('studyHeading').textContent=(s.recordDate?'学习记录 · ':s.scopeIds?'搜索结果 · ':'')+names[s.source]+(s.source==='school'?' · 6 个示例词':'');$('studyCounter').textContent=gp.done+' / '+gp.total+' 已完成';progress('studyProgress',gp.total?gp.done/gp.total*100:0);$('studyProgress').setAttribute('aria-valuetext',gp.done+' / '+gp.total+' 个词已完成');
  $('groupStatus').textContent=empty?'':complete?'本组 '+gp.total+' 个词已完成'+(gp.extra?'，另完成 '+gp.extra+' 次重复巩固。':'。'):gp.repeated?'正在重复巩固 · 本组进度不增加':(s.practice?'自主复习':'正在学习本组单词')+' · 每个词首次评分计入进度';
+ const counts=groupTaskCounts(s);$('groupComposition').textContent=empty?'':s.practice?'本组自主复习：'+counts.practiceDone+' / '+counts.practiceTotal+' 个词已完成':'本组新词：'+counts.newDone+' / '+counts.newTotal+' 已完成 · 复习：'+counts.reviewDone+' / '+counts.reviewTotal+' 已完成';
  $('studyBack').setAttribute('aria-label',s.recordDate?'返回学习记录':'返回首页');$('backRecordsBtn').hidden=!s.recordDate;
  $('undoBtn').disabled=!s.history.length;
  const count=pool(s.source).length;
- $('selectionNote').textContent=s.single?'本次只学习这个词。完成后可选择继续学习词库。':s.practice?'自由练习 · 不改变到期时间和今日计划。':('本组固定 '+gp.total+' 个不同的词；最多附加 2 次到期巩固，重复评分不增加本组进度。'+(s.explicit?'包含你主动选择的单词。':(s.scopeIds?'仅安排当前搜索结果，无到期任务时可自主加练。':'按复习时间安排，无任务时正常结束。')));
+ $('selectionNote').textContent=s.single?'本次只学习这个词。完成后可选择继续学习词库。':s.practice?'自由练习 · 不改变到期时间和今日计划。':('本组计划已锁定：'+gp.total+' 个不同的词；新词与复习不互相转移名额。最多附加 2 次到期巩固，重复评分不增加本组进度。'+(s.explicit?'包含你主动选择的单词。':(s.scopeIds?'仅安排当前搜索结果，无到期任务时可自主加练。':'新词按剩余目标分配；复习按到期时间安排，无任务时正常结束。')));
 
  document.querySelectorAll('[data-mode]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.mode===state.mode));
  if(empty){renderNoTasks();return;}
@@ -1355,7 +1396,7 @@ function updateReviewSummary(){
  const short=ready.filter(w=>state.memory[w.word].stage==='relearn').length,review=ready.length-short;
  $('attemptsSummary').textContent=`另有 ${Math.max(0,state.day.reviewCount-state.day.dueCount)} 次短期巩固、${state.day.practiceCount} 次自主加练，不抵扣计划名额。`;$('dueSummary').textContent=`到期复习 ${review} 个 · 可巩固 ${short} 个 · 未学 ${fresh} 个`;
  const pending=pendingSummary(words.map(w=>w.word));
- $('nextReviewSummary').textContent=`今日剩余名额：新词 ${Math.max(0,state.settings.newGoal-state.day.newCount)}，到期复习 ${Math.max(0,state.settings.reviewGoal-state.day.dueCount)}。`+(pending.next?`下次可练：${whenText(pending.next)}（若继续学其他词，巩固可能提前就绪）。`:'暂无未来复习任务。');
+ $('nextReviewSummary').textContent=`今日新词：已学 ${state.day.newCount} / 目标 ${state.settings.newGoal} 个，剩余 ${Math.max(0,state.settings.newGoal-state.day.newCount)} 个；到期复习剩余 ${Math.max(0,state.settings.reviewGoal-state.day.dueCount)} 个。`+(pending.next?`下次可练：${whenText(pending.next)}（若继续学其他词，巩固可能提前就绪）。`:'暂无未来复习任务。');
 }
 function taskReason(task){
  const m=state.memory[task.word];
@@ -1392,14 +1433,15 @@ function appendReadyShort(s){
 }
 function gradeCurrent(level){
  if(currentPage!=='study'||!activeSession()||!state.session.revealed||!['bad','mid','good'].includes(level))return;
- ensureDay();stopSpeech();const s=state.session,w=currentWord(),task=s.tasks[s.index],hinted=s.hintUsed&&level==='good';
+ ensureDay();stopSpeech();const s=state.session,w=currentWord(),task=s.tasks[s.index],previousMemory=cleanMemory(state.memory[w.word]),wasSeen=state.seen.includes(w.word),hinted=s.hintUsed&&level==='good';
  if(hinted)level='mid';
  s.history.push({word:w.word,oldMemory:state.memory[w.word]?{...state.memory[w.word]}:null,wasSeen:state.seen.includes(w.word),wasWrong:state.wrong.includes(w.word),oldLevel:state.levels[w.word]||null,oldLogDate:localDate(),oldLog:state.learningLog[localDate()]?.[w.word]?{...state.learningLog[localDate()][w.word]}:null,oldDay:{...state.day},oldSeq:state.seq,beforeTasks:s.tasks.map(t=>({...t})),oldShortUsed:s.shortUsed,oldIndex:s.index,hintUsed:s.hintUsed});
  if(s.practice)state.day.practiceCount++;
  else{
   state.seq++;state.memory[w.word]=gradeMemory(state.memory[w.word],level,Date.now(),state.seq,localDate());
   state.levels[w.word]=level;state.wrong=state.wrong.filter(id=>id!==w.word);if(level!=='good')state.wrong.push(w.word);
-  if(!state.seen.includes(w.word)){state.seen.push(w.word);state.day.newCount++;}else state.day.reviewCount++;
+  if(task.kind==='new'&&!previousMemory&&!wasSeen)state.day.newCount++;else state.day.reviewCount++;
+  if(!wasSeen)state.seen.push(w.word);
   if(task.kind==='review')state.day.dueCount++;
  }
  recordLearning(w.word,level,task.kind);s.index++;s.revealed=false;s.hintUsed=false;appendReadyShort(s);persist();updateHome();renderWord();
@@ -1621,7 +1663,8 @@ function validateFullBackup(raw){
  for(const key of Object.keys(names)){const r=s.schedule?.[key];out.schedule[key]={done:r?list(r.done):[],round:r?integer(r.round,1,1000000):1};}
  for(const [id,level] of Object.entries(s.levels||{})){if(!known.has(id)||!['bad','mid','good'].includes(level))fail();out.levels[id]=level;}
  if(s.session){const v=s.session;if(v.engine!==6||!Array.isArray(v.tasks)||v.tasks.length>MAX_GROUP_SIZE+2||!Object.hasOwn(names,v.source)||v.tasks.some(t=>!known.has(t?.word)||!['new','review','relearn','practice'].includes(t.kind)))fail();
-  const tasks=v.tasks.map(t=>({word:t.word,kind:t.kind}));out.session={engine:6,tasks,ids:tasks.map(t=>t.word),source:v.source,limit:v.single?1:groupLimit(v.limit),single:!!v.single&&tasks.length===1,index:integer(v.index,0,tasks.length),revealed:!!v.revealed,hintUsed:!!v.hintUsed,history:[],practice:!!v.practice,shortUsed:integer(v.shortUsed??0,0,2),baseIds:list(v.baseIds),explicit:!!v.explicit,scopeIds:Array.isArray(v.scopeIds)?list(v.scopeIds):null,recordDate:validRecordDate(v.recordDate)?v.recordDate:null};
+  if(v.plan!==undefined&&!validSessionPlan(v.plan,v.tasks,v.baseIds,known))fail();
+  const tasks=v.tasks.map(t=>({word:t.word,kind:t.kind}));out.session={engine:6,tasks,ids:tasks.map(t=>t.word),source:v.source,limit:v.single?1:groupLimit(v.limit),single:!!v.single&&tasks.length===1,index:integer(v.index,0,tasks.length),revealed:!!v.revealed,hintUsed:!!v.hintUsed,history:[],practice:!!v.practice,shortUsed:integer(v.shortUsed??0,0,2),baseIds:list(v.baseIds),explicit:!!v.explicit,scopeIds:Array.isArray(v.scopeIds)?list(v.scopeIds):null,recordDate:validRecordDate(v.recordDate)?v.recordDate:null,plan:makeSessionPlan(v.plan||tasks,v.baseIds)};
  }
  return out;
 }
